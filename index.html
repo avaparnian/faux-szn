@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faux Szn</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+     <!-- HEADER -->
+    <header>
+        <!-- HAMBURGER MENU -->
+        <button class="hamburgerBtn iconBtn" aria-label="Open menu">
+            <span class="hbLine"></span>
+            <span class="hbLine"></span>
+            <span class="hbLine"></span>
+        </button>
+        <!-- LOGO -->
+        <a href="index.html"><img id="navLogo" src="assets/Logo.png" alt="Faux Szn"></a>
+        <!-- DESKTOP NAV -->
+        <nav id="desktopNav">
+            <ul id="navList">
+                <li class="navItem"><a href="">PRODUCTS</a></li>
+                <li class="navItem"><a href="">ABOUT US</a></li>
+                <li class="navItem"><a href="">CONTACT</a></li>
+                <li class="navItem"><a href="">GALLERY</a></li>
+            </ul>
+        </nav>
+         <!-- CART BUTTON -->
+        <button class="cartBtn iconBtn" aria-label="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
+                <path d="M8 11V6a4 4 0 0 1 8 0v5"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- MOBILE NAV -->
+    <nav class="menuDrawer" id="menuDrawer">
+        <ul class="drawerList">
+            <li><a href="" class="current">PRODUCTS</a></li>
+            <li><a href="">ABOUT US</a></li>
+            <li><a href="">CONTACT</a></li>
+            <li><a href="">GALLERY</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <video class="heroVideo" autoplay muted loop playsinline poster="assets/Hero.jpg">
+            <source src="assets/HeroClip.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- LISTINGS -->
+    <div id="listings" class="listingsGrid"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        
+    </footer>
+
+  <script src="js/shop.js"></script>
+</body>
+</html>
