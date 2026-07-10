@@ -4,7 +4,7 @@
         "name" : "MENS HOODIE",
         "price" : 10000,
         "description" : "Heabyweight hoodie with back print",
-        "images" : ["https://res.cloudinary.com/dazfs9xgr/image/upload/v1783511253/image3_bx9vzn.jpg"],
+        "images" : ["https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674658/hoodie_q7tuou.png"],
         "sizes": {"XS": true, "S": true, "M": true, "L": true, "XL": true, "XXL": true},
         "active" : true
     },
@@ -14,7 +14,7 @@
         "name" : "WOMENS HOODIE",
         "price" : 10000,
         "description" : "Heabyweight hoodie with back print",
-        "images" : ["https://res.cloudinary.com/dazfs9xgr/image/upload/v1783511252/image5_r76ce1.jpg"],
+        "images" : ["https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674659/jacket_baj3zy.png"],
         "sizes": {"XS": true, "S": true, "M": true, "L": true, "XL": true, "XXL": true},
         "active" : true
     }
