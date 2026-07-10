@@ -25,7 +25,7 @@ body.noScroll {
 /* NAV BAR */
 
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -183,6 +183,7 @@ header {
         transparent 20%
     );
     pointer-events: none; 
+    
 }
 
 .heroVideo {
@@ -192,6 +193,7 @@ header {
     object-fit: cover;  
     position: relative;
     overflow: hidden;
+
 }
 
     /* LISTINGS */
@@ -242,7 +244,7 @@ header {
 
 /* FOOTER */
 footer {
-    height: 20rem;
+    height: 50rem;
 }
 
 
