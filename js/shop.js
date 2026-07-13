@@ -43,15 +43,65 @@ function renderCard(item) {
 // PRODUCT VIEW
 const productView = document.getElementById("productView");
 
+// OPEN PRODUCT VIEW
 function openProductView(item) {
+
+  // TEXT
+  document.querySelector(".pvTitle").textContent = item.name;
+  document.querySelector(".pvPrice").textContent = formatPrice(item.price);
+  document.querySelector(".pvDescription").textContent = item.description;
+
+  // CAROUSEL
+  const track = document.querySelector(".pvTrack");
+  track.innerHTML = item.images
+    .map(src => `<img src="${src}" alt="${item.name}">`)
+    .join("");
+  pvTrack.scrollTo({left: 0});
+
+  // IMAGE COUNTER
+  const dots = document.querySelector(".pvDots");
+  dots.innerHTML = item.images
+    .map((_,i) => `<span class="pvDot ${i === 0 ? "active" : ""}"></span>`)
+    .join("");
+
+  // SIZES
+  const sizes = document.querySelector(".pvSizes");
+  sizes.innerHTML = Object.entries(item.sizes)
+    .map(([size, inStock]) =>
+      `<button class="sizeBtn${inStock ? "" : " unavailable"}" ${inStock ? "" : "disabled"}>${size}</button>`)
+    .join("");
+
+  // OPEN PREVIEW
   productView.classList.add("open");
-  document.body.style.overflow = "";
+  document.body.style.overflow = "hidden";
 }
 
+// CAROUSEL CONTROLS
+const pvTrack = document.querySelector(".pvTrack");
+
+document.querySelector(".pvNext").addEventListener("click", () => {
+  pvTrack.scrollBy({left: pvTrack.clientWidth, behavior: "smooth" });
+});
+
+document.querySelector(".pvPrev").addEventListener("click", () => {
+  pvTrack.scrollBy({left: -pvTrack.clientWidth, behavior: "smooth" });
+});
+
+pvTrack.addEventListener("scroll", () =>  {
+  const index = Math.round(pvTrack.scrollLeft / pvTrack.clientWidth);
+  document.querySelectorAll(".pvDot").forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+});
+
+
+// CLOSE PRODUCT VIEW
 function closeProductView() {
   productView.classList.remove("open");
   document.body.style.overflow = "";
 }
+
+document.querySelector(".pvClose").addEventListener("click", closeProductView);
 
 productView.addEventListener("click", (e) => {
   if (e.target === productView) closeProductView();

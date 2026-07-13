@@ -14,8 +14,8 @@
         "name" : "WOMENS HOODIE",
         "price" : 10000,
         "description" : "Heabyweight hoodie with back print",
-        "images" : ["https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674659/jacket_baj3zy.png"],
-        "sizes": {"XS": true, "S": true, "M": true, "L": true, "XL": true, "XXL": true},
+        "images" : ["https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674659/jacket_baj3zy.png", "https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674658/hoodie_q7tuou.png", "https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674659/jacket_baj3zy.png", "https://res.cloudinary.com/dazfs9xgr/image/upload/v1783674659/jacket_baj3zy.png"],
+        "sizes": {"XS": true, "S": true, "M": false, "L": true, "XL": true, "XXL": true},
         "active" : true
     }
 ]

@@ -21,10 +21,12 @@
         <!-- DESKTOP NAV -->
         <nav id="desktopNav">
             <ul id="navList">
+                <li class="navItem">♱</li>
                 <li class="navItem"><a href="">PRODUCTS</a></li>
                 <li class="navItem"><a href="">ABOUT US</a></li>
                 <li class="navItem"><a href="">CONTACT</a></li>
                 <li class="navItem"><a href="">GALLERY</a></li>
+                <li class="navItem">♱</li>
             </ul>
         </nav>
          <!-- CART BUTTON -->
@@ -51,9 +53,22 @@
     <!-- PRODUCT VIEW -->
     <div class="productView" id="productView">
         <div class="pvContent">
+            <div class="pvTopBar">
+                <h2 class="pvTitle"></h2>
+                <button class="pvClose" aria-label="Close">✕</button>
+            </div>
             <div class="pvGallery">
+                <button class="pvArrow pvPrev" aria-label="Previous image">‹</button>
                 <div class="pvTrack"></div>
-                
+                <button class="pvArrow pvNext" aria-label="Next image">›</button>
+                <div class="pvDots"></div>
+            </div>
+            <div class="pvBottom">
+                <p class="pvPrice"></p>
+                <p class="pvSizeText">SIZE</p>
+                <div class="pvSizes"></div>
+                <button class="pvAddBtn">ADD TO CART</button>
+                <div class="pvDescription"></div>
             </div>
         </div>
     </div>
