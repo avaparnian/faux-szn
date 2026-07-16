@@ -1,6 +1,9 @@
 :root {
     --bg: rgb(0,0,0);
     --text: rgb(240, 240, 240);
+    --menu: rgba(15, 15, 15, 0.99);
+
+    --product-ratio: 4/5;
 }
 
 @font-face {
@@ -27,7 +30,6 @@ body.noScroll {
 
 
 /* NAV BAR */
-
 header {
     position: fixed;
     top: 0;
@@ -95,6 +97,29 @@ header {
     cursor: pointer;
     display: flex;
     justify-self: end;
+
+    position: relative;
+}
+
+.cartBtn svg {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.cartBtn .closeIcon {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.cartBtn.open .cartIcon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.cartBtn.open .closeIcon {
+    opacity: 1;
+    transform: rotate(0deg);
 }
 
 .hamburgerBtn {
@@ -130,13 +155,110 @@ header {
 }
 
 
-/* DRAWER */
 
+/* CART */
+.cartDrawer {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    background-color: var(--menu);
+    padding: 6rem 1.5rem 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s;
+}
+.cartDrawer.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cartHeader {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.cartItems {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.cartSummary {
+    padding: 1rem 0rem 0rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cartItem {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    /* align-items: center; */
+}
+
+.ciImg {
+    width: 8rem;
+    aspect-ratio: var(--product-ratio);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.ciInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+}
+
+.ciInfo p{
+    margin: 0;
+}
+
+.ciRemove {
+    background: none;
+    border: none;
+    color: var(--text);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    align-self: start;
+    font-family: Spectral;
+}
+
+.csRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.csTotal {
+    font-size: 1.6rem;
+    margin-top: 0.rem;
+}
+
+.checkoutBtn {
+    width: 100%;
+    margin-top: 0.5rem;
+    background-color: white;
+    border: none;
+    height: 3rem;
+    font-family: Spectral;
+    font-size: 1.3rem;
+}
+
+
+
+/* MENU DRAWER */
 .menuDrawer {
     position: fixed;
     inset: 0;
     z-index: 5;
-    background: rgba(15, 15, 15, 0.95);
+    background: var(--menu);
     padding-top: 8rem;
 
     opacity: 0;
@@ -176,7 +298,7 @@ header {
     position: fixed;
     inset: 0;
     z-index: 5;
-    background-color:rgba(15, 15, 15, 0.99);
+    background-color: var(--menu);
     padding-top: 4rem;
 
     opacity: 0;
@@ -367,9 +489,7 @@ header {
 }
 
 
-
 /* HERO */
-
 .hero {
     position: relative;
 }
@@ -398,8 +518,8 @@ header {
 
 }
 
-    /* LISTINGS */
 
+    /* LISTINGS */
 .listingsTitle {
         padding-top: 3rem;
 
@@ -423,11 +543,11 @@ header {
 }
 
 .productImg {
-    flex-shrink: 0;
+    width: 100%;                 /* fill the card's width */
+    aspect-ratio: var(--product-ratio);
     object-fit: cover;
+    flex-shrink: 0;
     display: block;
-    /* width: 100%; */
-    height: 90%;
     margin: 0;
     padding: 0;
 }
@@ -452,6 +572,8 @@ header {
 footer {
     height: 50rem;
 }
+
+
 
 
 /* MOBILE */
@@ -496,13 +618,6 @@ footer {
         padding-top: 1.5rem;
     }
 
-    .productImg {
-
-    }
-
-    .productInfo {
-    }
-
     .productName {
         font-size: 1.2rem;
     }
@@ -516,11 +631,11 @@ footer {
         padding: 6rem 0 0; 
         display: grid;
         grid-template-columns: 3fr 2fr;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto 1fr;
         grid-template-areas: 
             "gallery topbar"
-            "gallery bottom"
-            "dots bottom";
+            "gallery bottom";
+            align-items: start;
     }
 
     .pvGallery {
@@ -563,10 +678,34 @@ footer {
         box-sizing: border-box;
     }
 
-    .pvPrice {
-        padding-top: 0;
+    .pvTitle { 
+        font-size: 2rem;
+        padding-bottom: 2rem;
     }
 
+    .pvClose {
+        transform: translateY(-1.6rem);
+    }
+
+    .pvPrice {
+        font-size: 2rem;
+        padding-top: 0;
+        padding-bottom: 2rem;
+    }
+
+    .sizeBtn {
+        font-size: 1rem;
+    }
+
+    .pvAddBtn {
+        height: 5rem;
+    }
+
+    /* CART */
+    .cartDrawer {
+        left: auto;
+        width: min(26rem, 100%);
+    }
 
 }
 

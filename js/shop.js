@@ -119,3 +119,27 @@ hamburgerBtn.addEventListener("click", () => {
 const isOpen = menuDrawer.classList.contains("open");
 hamburgerBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
 });
+
+// CART TOGGLE
+const cartBtn = document.querySelector(".cartBtn");
+const cartDrawer = document.getElementById("cartDrawer");
+
+function closeCart() {
+    cartDrawer.classList.remove("open");
+    cartBtn.classList.remove("open");
+    cartBtn.setAttribute("aria-label", "Open cart");
+}
+
+function closeMenu() {
+    menuDrawer.classList.remove("open");
+    hamburgerBtn.classList.remove("open");
+    hamburgerBtn.setAttribute("aria-label", "Open menu");
+}
+
+cartBtn.addEventListener("click", () => {
+    closeMenu();
+    cartDrawer.classList.toggle("open");
+    cartBtn.classList.toggle("open");
+    const isOpen = cartDrawer.classList.contains("open");
+    cartBtn.setAttribute("aria-label", isOpen ? "Close cart" : "Open cart");
+});
