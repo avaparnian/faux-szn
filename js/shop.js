@@ -2,27 +2,13 @@ function formatPrice(cents) {
   return "$" + (cents / 100).toFixed(2);
 }
 
-// LISTINGS
-async function loadListings() {
-  const container = document.getElementById("listings");
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  try {
-    const res = await fetch("data/listings.json");
-    if (!res.ok) throw new Error("Request failed: " + res.status);
-
-    const items = await res.json();
-
-    const activeItems = items.filter(item => item.active);
-
-    activeItems.forEach(item => {
-      container.appendChild(renderCard(item));
-    });
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = "<p>Could not load products.</p>";
-  }
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
 }
-loadListings();
+
+let currentItem = null;
 
 // CARDS
 function renderCard(item) {
@@ -45,6 +31,7 @@ const productView = document.getElementById("productView");
 
 // OPEN PRODUCT VIEW
 function openProductView(item) {
+  currentItem = item;
 
   // TEXT
   document.querySelector(".pvTitle").textContent = item.name;
@@ -71,10 +58,24 @@ function openProductView(item) {
       `<button class="sizeBtn${inStock ? "" : " unavailable"}" ${inStock ? "" : "disabled"}>${size}</button>`)
     .join("");
 
+  selectedSize = null;
+
   // OPEN PREVIEW
   productView.classList.add("open");
   document.body.style.overflow = "hidden";
 }
+
+// SIZE SELECTION
+let selectedSize = null;
+
+document.querySelector(".pvSizes").addEventListener("click", (e) => {
+  const btn = e.target.closest(".sizeBtn");
+  if (!btn || btn.disabled) return;
+
+  document.querySelectorAll(".sizeBtn").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+  selectedSize = btn.textContent;
+});
 
 // CAROUSEL CONTROLS
 const pvTrack = document.querySelector(".pvTrack");
@@ -93,6 +94,25 @@ pvTrack.addEventListener("scroll", () =>  {
     dot.classList.toggle("active", i === index);
   });
 });
+
+// ADD TO CART
+function addToCart() {
+  if (!selectedSize) return;
+
+  cart.push({
+    id: currentItem.id,
+    name: currentItem.name,
+    price: currentItem.price,
+    image: currentItem.images[0],
+    size: selectedSize,
+  });
+  saveCart();
+  renderCart();
+  closeProductView();
+  closeMenu();
+  cartDrawer.classList.add("open");
+  cartBtn.classList.add("open");
+}
 
 
 // CLOSE PRODUCT VIEW
@@ -143,3 +163,69 @@ cartBtn.addEventListener("click", () => {
     const isOpen = cartDrawer.classList.contains("open");
     cartBtn.setAttribute("aria-label", isOpen ? "Close cart" : "Open cart");
 });
+
+// CART 
+function renderCart() {
+    const list = document.querySelector(".cartItems");
+
+    list.innerHTML = cart
+        .map((entry, i) => `
+            <li class="cartItem">
+                <img class="ciImg" src="${entry.image}" alt="${entry.name}">
+                <div class="ciInfo">
+                    <p class="ciName">${entry.name}</p>
+                    <p class="ciSize">${entry.size}</p>
+                    <p class="ciPrice">${formatPrice(entry.price)}</p>
+                    <button class="ciRemove" data-index="${i}">REMOVE</button>
+                </div>
+            </li>
+        `)
+        .join("");
+
+    // totals
+    const subtotal = cart.reduce((sum, entry) => sum + entry.price, 0);
+    const shipping = cart.length ? 1200 : 0;
+    document.querySelector(".csCart").textContent = formatPrice(subtotal);
+    document.querySelector(".csShipping").textContent = formatPrice(shipping);
+    document.querySelector(".csTotalPrice").textContent = formatPrice(subtotal + shipping);
+}
+
+document.querySelector(".cartItems").addEventListener("click", (e) => {
+    const btn = e.target.closest(".ciRemove");
+    if (!btn) return;
+
+    const row = btn.closest(".cartItem");
+    row.classList.add("removing");
+
+    row.addEventListener("transitionend", () => {
+        cart.splice(btn.dataset.index, 1);
+        saveCart();
+        renderCart();
+    }, { once: true });
+});
+
+// LISTINGS
+async function loadListings() {
+  const container = document.getElementById("listings");
+
+  try {
+    const res = await fetch("data/listings.json");
+    if (!res.ok) throw new Error("Request failed: " + res.status);
+
+    const items = await res.json();
+
+    const activeItems = items.filter(item => item.active);
+
+    activeItems.forEach(item => {
+      container.appendChild(renderCard(item));
+    });
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "<p>Could not load products.</p>";
+  }
+}
+
+document.querySelector(".pvAddBtn").addEventListener("click", addToCart);
+loadListings();
+renderCart();
+
