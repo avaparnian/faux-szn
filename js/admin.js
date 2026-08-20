@@ -222,7 +222,7 @@ document.getElementById("listingForm").addEventListener("submit", async (e) => {
     renderListingsList();
 });
 
-// GALLERY
+// GALLERYy
 function renderGalleryGrid() {
     const grid = document.getElementById("galleryGrid");
     grid.innerHTML = stubGallery
