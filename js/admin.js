@@ -43,8 +43,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 });
 
 document.getElementById("signOutBtn").addEventListener("click", () => {
-    document.getElementById("dashboard").classList.remove("active");
-    document.getElementById("loginScreen").style.display = "flex";
+    window.location.href = "/";
 });
 
 // SIDE PANEL TOGGLE
