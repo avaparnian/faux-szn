@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faux Szn — Admin</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="loginScreen" id="loginScreen">
+    <h1 class="loginTitle">ADMIN</h1>
+    <div class="loginBox">
+        <form class="loginForm" id="loginForm">
+            <label class="formLabel" for="email">EMAIL</label>
+            <input class="formInput" type="email" id="email" name="email" required>
+
+            <label class="formLabel" for="password">PASSWORD</label>
+            <input class="formInput" type="password" id="password" name="password" required>
+
+            <p class="formError" id="formError">INCORRECT EMAIL OR PASSWORD</p>
+
+            <button class="loginBtn" type="submit">LOG IN</button>
+        </form>
+    </div>
+</div>
+
+<div class="dashboard" id="dashboard">
+
+    <div class="topBar">
+        <button class="panelBtn" id="panelBtn" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+        </button>
+        <span class="pageLabel" id="pageLabel">LISTINGS</span>
+
+        <span class="brandName">FAUX SZN</span>
+
+        <button class="signOutBtn" id="signOutBtn">SIGN OUT</button>
+    </div>
+
+    <div class="sidePanel" id="sidePanel">
+        <button class="sideItem active" data-page="listings">MANAGE LISTINGS</button>
+        <button class="sideItem" data-page="gallery">MANAGE GALLERY</button>
+    </div>
+    <div class="sidePanelOverlay" id="sidePanelOverlay"></div>
+
+    <div class="pageArea">
+
+        <!-- LISTINGS PAGE -->
+        <div class="page active" id="page-listings">
+            <div class="listingsLayout">
+
+                <div class="listingsSidebar">
+                    <button class="addBtn" id="addListingBtn">+ ADD LISTING</button>
+                    <ul class="itemList" id="listingsList">
+                        <!-- rendered by JS -->
+                    </ul>
+                </div>
+
+                <div class="listingsDetail" id="listingsDetail">
+                    <p class="emptyState" id="listingEmptyState">SELECT A LISTING OR ADD A NEW ONE</p>
+
+                    <form class="listingForm" id="listingForm" style="display: none;">
+                        <div class="photoGrid" id="photoGrid">
+                            <!-- photo tiles + upload tile rendered by JS -->
+                        </div>
+                        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+
+                        <label class="formLabel" for="listingName">NAME</label>
+                        <input class="formInput dark" type="text" id="listingName" required>
+
+                        <label class="formLabel" for="listingPrice">PRICE (AUD)</label>
+                        <input class="formInput dark" type="number" id="listingPrice" step="0.01" min="0" required>
+
+                        <label class="formLabel" for="listingDescription">DESCRIPTION</label>
+                        <textarea class="formInput dark" id="listingDescription" rows="4"></textarea>
+
+                        <label class="formLabel">SIZES IN STOCK</label>
+                        <div class="sizeToggleRow" id="sizeToggleRow">
+                            <button type="button" class="sizeToggle active" data-size="S">S</button>
+                            <button type="button" class="sizeToggle active" data-size="M">M</button>
+                            <button type="button" class="sizeToggle active" data-size="L">L</button>
+                        </div>
+
+                        <div class="formActions">
+                            <button type="button" class="cancelBtn" id="cancelListingBtn">CANCEL</button>
+                            <button type="submit" class="saveBtn">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- GALLERY PAGE -->
+        <div class="page" id="page-gallery">
+            <div class="pageHeader">
+                <button class="addBtn" id="addGalleryBtn">+ ADD PHOTO</button>
+            </div>
+            <input type="file" id="galleryInput" accept="image/*" multiple hidden>
+            <div class="galleryGrid" id="galleryGrid">
+                <!-- rendered by JS -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

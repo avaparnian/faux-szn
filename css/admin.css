@@ -1,0 +1,495 @@
+:root {
+    --bg: rgb(0,0,0);
+    --text: rgb(240, 240, 240);
+    --error: rgb(200, 60, 60);
+    --dim: rgba(255, 255, 255, 0.5);
+    --line: rgba(255, 255, 255, 0.2);
+}
+
+@font-face {
+    font-family: "Spectral";
+    src: url("/assets/Spectral.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: Spectral;
+    margin: 0;
+}
+
+/* LOGIN */
+
+.loginScreen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.loginTitle {
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    margin: 0;
+    color: var(--text);
+}
+
+.loginBox {
+    background-color: transparent;
+    border: 0.1rem solid white;
+    width: 22rem;
+    padding: 3rem 2.5rem;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formLabel {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 1.25rem;
+    margin-bottom: 0.4rem;
+}
+
+.formLabel:first-child {
+    margin-top: 0;
+}
+
+.formInput {
+    background: none;
+    border: none;
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-family: Spectral;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    outline: none;
+}
+
+.formInput:focus {
+    border-bottom-color: white;
+}
+
+.formError {
+    color: var(--error);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    margin: 1rem 0 0;
+    display: none;
+}
+
+.formError.show {
+    display: block;
+}
+
+.loginBtn {
+    background-color: white;
+    color: black;
+    border: none;
+    font-family: Spectral;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    height: 3rem;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    display: none;
+}
+
+.dashboard.active {
+    display: block;
+}
+
+.topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4.5rem;
+    box-sizing: border-box;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--bg);
+    border-bottom: 0.1rem solid var(--line);
+    z-index: 10;
+}
+
+.panelBtn {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+}
+
+.pageLabel {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+}
+
+.brandName {
+    justify-self: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+}
+
+.signOutBtn {
+    justify-self: end;
+    background: none;
+    border: 0.1rem solid var(--line);
+    color: var(--text);
+    font-family: Spectral;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+/* SIDE PANEL */
+
+.sidePanel {
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
+    height: calc(100vh - 4.5rem);
+    width: 16rem;
+    background-color: var(--bg);
+    border-right: 0.1rem solid var(--line);
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.sidePanel.open {
+    transform: translateX(0);
+}
+
+.sideItem {
+    background: none;
+    border: none;
+    border-bottom: 0.1rem solid var(--line);
+    color: var(--text);
+    font-family: Spectral;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-align: left;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+}
+
+.sideItem.active {
+    color: black;
+    background-color: white;
+}
+
+.sidePanelOverlay {
+    position: fixed;
+    inset: 0;
+    top: 4.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 12;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.sidePanelOverlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* PAGE AREA */
+
+.pageArea {
+    padding: 6.5rem 2rem 3rem;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.pageHeader {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.addBtn {
+    background-color: white;
+    color: black;
+    border: none;
+    font-family: Spectral;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+}
+
+/* LISTINGS LIST */
+
+.itemList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 0.1rem solid var(--line);
+}
+
+.itemRow {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 0.1rem solid var(--line);
+    cursor: pointer;
+}
+
+.itemRow img {
+    width: 3.5rem;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.itemRowName {
+    flex: 1;
+}
+
+.itemRowPrice {
+    color: var(--dim);
+}
+
+/* GALLERY GRID */
+
+.galleryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 1rem;
+}
+
+.galleryTile {
+    position: relative;
+    aspect-ratio: 1/1;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.galleryTile.removing {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.galleryTile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.galleryTileDelete {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 0.1rem solid white;
+    color: white;
+    width: 1.75rem;
+    height: 1.75rem;
+    cursor: pointer;
+    font-family: Spectral;
+}
+
+/* LISTINGS SPLIT LAYOUT */
+
+.listingsLayout {
+    display: grid;
+    grid-template-columns: 18rem 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.listingsSidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.listingsSidebar .addBtn {
+    width: 100%;
+}
+
+.listingsSidebar .itemList {
+    border-top: 0.1rem solid var(--line);
+}
+
+.itemRow.selected {
+    background-color: white;
+    color: black;
+}
+
+.itemRow.selected .itemRowPrice {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.listingsDetail {
+    border: 0.1rem solid var(--line);
+    padding: 2rem;
+    min-height: 30rem;
+}
+
+.emptyState {
+    color: var(--dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.listingForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formInput.dark {
+    border-bottom: 0.1rem solid var(--line);
+    color: var(--text);
+}
+
+.formInput.dark:focus {
+    border-bottom-color: white;
+}
+
+textarea.formInput {
+    font-family: Spectral;
+    resize: vertical;
+}
+
+.listingForm .formLabel {
+    color: var(--dim);
+}
+
+/* PHOTO GRID */
+
+.photoGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.photoTile {
+    position: relative;
+    aspect-ratio: 4/5;
+}
+
+.photoTile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.photoTileDelete {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 0.1rem solid white;
+    color: white;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    font-family: Spectral;
+    font-size: 0.75rem;
+    padding: 0;
+}
+
+.photoUploadTile {
+    aspect-ratio: 4/5;
+    border: 0.1rem dashed var(--line);
+    background: none;
+    color: var(--dim);
+    font-family: Spectral;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* SIZE TOGGLES */
+
+.sizeToggleRow {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.sizeToggle {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: none;
+    border: 0.1rem solid var(--line);
+    color: var(--dim);
+    font-family: Spectral;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.sizeToggle.active {
+    border-color: white;
+    color: white;
+}
+
+/* FORM ACTIONS */
+
+.formActions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.cancelBtn {
+    flex: 1;
+    background: none;
+    border: 0.1rem solid var(--line);
+    color: var(--text);
+    font-family: Spectral;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.saveBtn {
+    flex: 1;
+    background-color: white;
+    color: black;
+    border: none;
+    font-family: Spectral;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    height: 3rem;
+    cursor: pointer;
+}
