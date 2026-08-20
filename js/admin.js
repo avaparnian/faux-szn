@@ -137,12 +137,24 @@ function renderPhotoGrid() {
     });
 }
 
-document.getElementById("photoInput").addEventListener("change", (e) => {
+document.getElementById("photoInput").addEventListener("change", async (e) => {
     const files = Array.from(e.target.files).slice(0, 10 - formPhotos.length);
-    files.forEach(file => {
-        formPhotos.push(URL.createObjectURL(file));   // local preview; real upload comes in the backend phase
-    });
-    renderPhotoGrid();
+
+    for (const file of files) {
+        const res = await fetch("/api/upload-image", {
+            method: "POST",
+            headers: {
+                "Content-Type": file.type,
+                "x-filename": file.name,
+                "Authorization": `Bearer ${adminToken}`,
+            },
+            body: file,
+        });
+        const data = await res.json();
+        formPhotos.push(data.url);
+        renderPhotoGrid();
+    }
+
     e.target.value = "";
 });
 
@@ -222,7 +234,7 @@ document.getElementById("listingForm").addEventListener("submit", async (e) => {
     renderListingsList();
 });
 
-// GALLERYy
+// GALLERY
 function renderGalleryGrid() {
     const grid = document.getElementById("galleryGrid");
     grid.innerHTML = stubGallery
@@ -252,12 +264,24 @@ document.getElementById("addGalleryBtn").addEventListener("click", () => {
     document.getElementById("galleryInput").click();
 });
 
-document.getElementById("galleryInput").addEventListener("change", (e) => {
+document.getElementById("galleryInput").addEventListener("change", async (e) => {
     const files = Array.from(e.target.files);
-    files.forEach(file => {
-        stubGallery.push(URL.createObjectURL(file));
-    });
-    renderGalleryGrid();
+
+    for (const file of files) {
+        const res = await fetch("/api/upload-image", {
+            method: "POST",
+            headers: {
+                "Content-Type": file.type,
+                "x-filename": file.name,
+                "Authorization": `Bearer ${adminToken}`,
+            },
+            body: file,
+        });
+        const data = await res.json();
+        stubGallery.push(data.url);
+        renderGalleryGrid();
+    }
+
     e.target.value = "";
 });
 
