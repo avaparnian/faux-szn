@@ -188,16 +188,11 @@ document.querySelectorAll(".sizeToggle").forEach(btn => {
 document.getElementById("addListingBtn").addEventListener("click", () => openListingForm(null));
 
 document.getElementById("cancelListingBtn").addEventListener("click", () => {
-    if (editingListing) {
-        openListingForm(editingListing);
-    } else {
-        document.getElementById("listingForm").style.display = "none";
-        document.getElementById("listingEmptyState").style.display = "block";
-        editingListing = null;
-        renderListingsList();
-    }
+    document.getElementById("listingForm").style.display = "none";
+    document.getElementById("listingEmptyState").style.display = "block";
+    editingListing = null;
+    renderListingsList();
 });
-
 document.getElementById("listingForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
