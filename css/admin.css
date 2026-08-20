@@ -493,3 +493,15 @@ textarea.formInput {
     height: 3rem;
     cursor: pointer;
 }
+
+.deleteBtn {
+    flex: 1;
+    background: none;
+    border: 0.1rem solid var(--error);
+    color: var(--error);
+    font-family: Spectral;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    height: 3rem;
+    cursor: pointer;
+}

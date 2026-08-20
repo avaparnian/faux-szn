@@ -67,9 +67,7 @@
                     <p class="emptyState" id="listingEmptyState">SELECT A LISTING OR ADD A NEW ONE</p>
 
                     <form class="listingForm" id="listingForm" style="display: none;">
-                        <div class="photoGrid" id="photoGrid">
-                            <!-- photo tiles + upload tile rendered by JS -->
-                        </div>
+                        <div class="photoGrid" id="photoGrid"></div>
                         <input type="file" id="photoInput" accept="image/*" multiple hidden>
 
                         <label class="formLabel" for="listingName">NAME</label>
@@ -88,7 +86,8 @@
                             <button type="button" class="sizeToggle active" data-size="L">L</button>
                         </div>
 
-                        <div class="formActions">
+                        <<div class="formActions">
+                            <button type="button" class="deleteBtn" id="deleteListingBtn" style="display: none;">DELETE</button>
                             <button type="button" class="cancelBtn" id="cancelListingBtn">CANCEL</button>
                             <button type="submit" class="saveBtn">SAVE</button>
                         </div>

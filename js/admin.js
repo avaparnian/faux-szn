@@ -175,6 +175,8 @@ function openListingForm(item) {
         btn.classList.toggle("active", inStock !== false);
     });
 
+    document.getElementById("deleteListingBtn").style.display = item ? "block" : "none";
+
     renderPhotoGrid();
     renderListingsList();
 }
@@ -283,6 +285,28 @@ document.getElementById("galleryInput").addEventListener("change", async (e) => 
     }
 
     e.target.value = "";
+});
+
+document.getElementById("deleteListingBtn").addEventListener("click", async () => {
+    if (!editingListing) return;
+    if (!confirm(`Delete "${editingListing.name}"? This cannot be undone.`)) return;
+
+    await fetch("/api/delete-listing", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${adminToken}`,
+        },
+        body: JSON.stringify({ id: editingListing.id }),
+    });
+
+    stubListings = stubListings.filter(l => l.id !== editingListing.id);
+    editingListing = null;
+
+    document.getElementById("listingForm").style.display = "none";
+    document.getElementById("listingEmptyState").style.display = "block";
+
+    renderListingsList();
 });
 
 renderGalleryGrid();
