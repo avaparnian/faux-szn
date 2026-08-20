@@ -209,7 +209,7 @@ async function loadListings() {
   const container = document.getElementById("listings");
 
   try {
-    const res = await fetch("data/listings.json");
+    const res = await fetch("/api/get-listings");
     if (!res.ok) throw new Error("Request failed: " + res.status);
 
     const items = await res.json();

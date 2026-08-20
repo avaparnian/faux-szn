@@ -1,8 +1,12 @@
 // STUB DATA — replaced by real fetch in the backend phase
-const stubListings = [
-    { id: "reaper-hoodie", name: "REAPER HOODIE", price: 9000, images: ["https://placehold.co/200x250"], description: "", sizes: { S: true, M: true, L: true } },
-    { id: "burnout-tee", name: "BURNOUT TEE", price: 4000, images: ["https://placehold.co/200x250"], description: "", sizes: { S: true, M: true, L: true } },
-];
+let stubListings = [];
+let adminToken = null;
+
+async function loadListingsFromServer() {
+    const res = await fetch("/api/get-listings");
+    stubListings = await res.json();
+    renderListingsList();
+}
 
 let stubGallery = [
     "https://placehold.co/300x300",
@@ -10,11 +14,32 @@ let stubGallery = [
     "https://placehold.co/300x300",
 ];
 
-// LOGIN (cosmetic only for now)
-document.getElementById("loginForm").addEventListener("submit", (e) => {
+// LOGIN
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("/api/admin-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+    });
+
+    if (!res.ok) {
+        document.getElementById("formError").classList.add("show");
+        return;
+    }
+
+    const data = await res.json();
+    adminToken = data.token;
+
+    document.getElementById("formError").classList.remove("show");
     document.getElementById("loginScreen").style.display = "none";
     document.getElementById("dashboard").classList.add("active");
+
+    await loadListingsFromServer();
 });
 
 document.getElementById("signOutBtn").addEventListener("click", () => {
@@ -159,7 +184,7 @@ document.getElementById("cancelListingBtn").addEventListener("click", () => {
     }
 });
 
-document.getElementById("listingForm").addEventListener("submit", (e) => {
+document.getElementById("listingForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const sizes = {};
@@ -184,9 +209,17 @@ document.getElementById("listingForm").addEventListener("submit", (e) => {
         stubListings.push(data);
     }
 
+    await fetch("/api/save-listings", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${adminToken}`,
+        },
+        body: JSON.stringify(stubListings),
+    });
+
     editingListing = data;
     renderListingsList();
-    // real save-to-backend call goes here in the Functions phase
 });
 
 // GALLERY
@@ -228,5 +261,4 @@ document.getElementById("galleryInput").addEventListener("change", (e) => {
     e.target.value = "";
 });
 
-renderListingsList();
 renderGalleryGrid();
