@@ -204,6 +204,24 @@ document.querySelector(".cartItems").addEventListener("click", (e) => {
     }, { once: true });
 });
 
+document.querySelector(".checkoutBtn").addEventListener("click", async () => {
+    if (cart.length === 0) return;
+
+    const items = cart.map(entry => ({ id: entry.id, size: entry.size }));
+
+    const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+        window.location.href = data.url;   // redirect to Stripe's hosted checkout
+    }
+});
+
 // LISTINGS
 async function loadListings() {
   const container = document.getElementById("listings");
