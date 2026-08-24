@@ -8,11 +8,13 @@ async function loadListingsFromServer() {
     renderListingsList();
 }
 
-let stubGallery = [
-    "https://placehold.co/300x300",
-    "https://placehold.co/300x300",
-    "https://placehold.co/300x300",
-];
+let stubGallery = [];
+
+async function loadGalleryFromServer() {
+    const res = await fetch("/api/get-gallery");
+    stubGallery = await res.json();
+    renderGalleryGrid();
+}
 
 // LOGIN
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
@@ -40,6 +42,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     document.getElementById("dashboard").classList.add("active");
 
     await loadListingsFromServer();
+    await loadGalleryFromServer();
 });
 
 document.getElementById("signOutBtn").addEventListener("click", () => {
@@ -214,7 +217,7 @@ document.getElementById("listingForm").addEventListener("submit", async (e) => {
         const idx = stubListings.findIndex(l => l.id === editingListing.id);
         stubListings[idx] = data;
     } else {
-        stubListings.push(data);
+        stubListings.unshift(data);
     }
 
     await fetch("/api/save-listings", {
@@ -247,10 +250,18 @@ function renderGalleryGrid() {
             const tile = btn.closest(".galleryTile");
             tile.classList.add("removing");
 
-            tile.addEventListener("transitionend", () => {
+                tile.addEventListener("transitionend", async () => {
                 stubGallery.splice(Number(btn.dataset.index), 1);
                 renderGalleryGrid();
-                // real delete-from-backend call goes here in the Functions phase
+
+                await fetch("/api/save-gallery", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${adminToken}`,
+                    },
+                    body: JSON.stringify(stubGallery),
+                });
             }, { once: true });
         });
     });
@@ -274,9 +285,18 @@ document.getElementById("galleryInput").addEventListener("change", async (e) => 
             body: file,
         });
         const data = await res.json();
-        stubGallery.push(data.url);
+        stubGallery.unshift(data.url);
         renderGalleryGrid();
     }
+
+    await fetch("/api/save-gallery", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${adminToken}`,
+        },
+        body: JSON.stringify(stubGallery),
+    });
 
     e.target.value = "";
 });
@@ -302,5 +322,3 @@ document.getElementById("deleteListingBtn").addEventListener("click", async () =
 
     renderListingsList();
 });
-
-renderGalleryGrid();

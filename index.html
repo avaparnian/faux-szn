@@ -22,10 +22,10 @@
         <nav id="desktopNav">
             <ul id="navList">
                 <li class="navItem">♱</li>
-                <li class="navItem"><a href="">PRODUCTS</a></li>
-                <li class="navItem"><a href="">ABOUT US</a></li>
-                <li class="navItem"><a href="">CONTACT</a></li>
-                <li class="navItem"><a href="">GALLERY</a></li>
+                <li class="navItem"><a href="#" data-page="products">PRODUCTS</a></li>
+                <li class="navItem"><a href="#" data-page="about">ABOUT</a></li>
+                <li class="navItem"><a href="#" data-page="showcase">SHOWCASE</a></li>
+                <li class="navItem"><a href="#" data-page="contact">CONTACT</a></li>
                 <li class="navItem">♱</li>
             </ul>
         </nav>
@@ -63,10 +63,10 @@
     <!-- MOBILE NAV -->
     <nav class="menuDrawer" id="menuDrawer">
         <ul class="drawerList">
-            <li><a href="" class="current">PRODUCTS</a></li>
-            <li><a href="">ABOUT US</a></li>
-            <li><a href="">CONTACT</a></li>
-            <li><a href="">GALLERY</a></li>
+            <li><a href="#" class="current" data-page="products">PRODUCTS</a></li>
+            <li><a href="#" data-page="about">ABOUT</a></li>
+            <li><a href="#" data-page="showcase">SHOWCASE</a></li>
+            <li><a href="#" data-page="contact">CONTACT</a></li>
         </ul>
     </nav>
 
@@ -100,9 +100,35 @@
         </video>
     </div>
 
-    <!-- LISTINGS -->
-     <h1 class="listingsTitle">♱ THE COLLECTION ♱</h1>
-    <div id="listings" class="listingsGrid"></div>
+    <!-- PAGES -->
+    <div class="pageWrapper">
+
+        <section class="sitePage active" id="page-products">
+            <h1 class="listingsTitle">♱ THE COLLECTION ♱</h1>
+            <div id="listings" class="listingsGrid"></div>
+        </section>
+
+        <section class="sitePage" id="page-about">
+            <h1 class="pageTitle">♱ ABOUT ♱</h1>
+            <div class="aboutContent" id="aboutContent">
+                I make cool art!!
+            </div>
+        </section>
+
+        <section class="sitePage" id="page-showcase">
+            <h1 class="pageTitle">♱ SHOWCASE ♱</h1>
+            <div class="showcaseGrid" id="showcaseGrid"></div>
+        </section>
+
+        <section class="sitePage" id="page-contact">
+            <h1 class="pageTitle">♱ CONTACT ♱</h1>
+            <div class="contactContent">
+                <p class="contactRow">EMAIL — <a href="somethingmaybe@fauxszn.com">somethingmaybe@fauxszn.com</a></p>
+                <p class="contactRow">INSTAGRAM — <a href="https://instagram.com/fauxszn" target="_blank">@fauxszn</a></p>
+            </div>
+        </section>
+
+    </div>
 
     <!-- FOOTER -->
     <footer></footer>

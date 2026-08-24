@@ -243,6 +243,41 @@ async function loadListings() {
   }
 }
 
+// SITE PAGE SWITCHING
+const sitePages = document.querySelectorAll(".sitePage");
+const navLinks = document.querySelectorAll("[data-page]");
+
+function switchPage(target) {
+    sitePages.forEach(p => p.classList.remove("active"));
+    document.getElementById(`page-${target}`).classList.add("active");
+
+    navLinks.forEach(link => link.classList.toggle("current", link.dataset.page === target));
+
+    closeMenu();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        switchPage(link.dataset.page);
+    });
+});
+
+// SHOWCASE
+async function loadShowcase() {
+    const grid = document.getElementById("showcaseGrid");
+    try {
+        const res = await fetch("/api/get-gallery");
+        const photos = await res.json();
+        grid.innerHTML = photos.map(src => `<img src="${src}" alt="">`).join("");
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+loadShowcase();
+
 document.querySelector(".pvAddBtn").addEventListener("click", addToCart);
 loadListings();
 renderCart();

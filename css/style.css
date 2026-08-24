@@ -537,6 +537,62 @@ header {
 
 }
 
+.pageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* SITE PAGES */
+.sitePage {
+    display: none;
+}
+
+.sitePage.active {
+    display: block;
+}
+
+.pageTitle {
+    padding-top: 3rem;
+    text-align: center;
+    margin: 0;
+}
+
+.aboutContent,
+.contactContent {
+    max-width: 40rem;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.contactRow {
+    margin: 0 0 1rem;
+}
+
+.contactRow a {
+    color: var(--text);
+}
+
+.showcaseGrid {
+    columns: 2;
+    column-gap: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.showcaseGrid img {
+    width: 100%;
+    aspect-ratio: unset;      /* let photos keep their natural height — the mosaic look */
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0;
+    break-inside: avoid;      /* stops a photo being split across two columns */
+}
+
 
     /* LISTINGS */
 .listingsTitle {
@@ -659,6 +715,10 @@ footer {
         padding-top: 5rem;
         width: 100%;
         height: 15rem;
+    }
+
+    .showcaseGrid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* LISTINGS */
@@ -784,5 +844,9 @@ footer {
     .cartDrawer {
         left: auto;
         width: min(26rem, 100%);
+    }
+
+    .showcaseGrid {
+        columns: 3;
     }
 }
