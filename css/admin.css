@@ -506,6 +506,17 @@ textarea.formInput {
     cursor: pointer;
 }
 
+.backHomeLink {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.backHomeLink:hover {
+    color: white;
+}
+
 .itemRow.dragging {
     opacity: 0;
 }
