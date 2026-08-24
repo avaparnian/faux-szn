@@ -577,12 +577,13 @@ header {
 }
 
 .showcaseGrid {
-    padding-top: 4rem;
     columns: 2;
     column-gap: 0;
     max-width: none;
     margin: 0;
     padding: 0;
+    padding-top: 4rem;
+
 }
 
 .showcaseGrid img {
