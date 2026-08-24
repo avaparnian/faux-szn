@@ -88,6 +88,7 @@ sideItems.forEach(btn => {
 // LISTINGS: SELECTION STATE
 let editingListing = null;
 let formPhotos = [];
+let listSortable = null;
 
 function renderListingsList() {
     const list = document.getElementById("listingsList");
@@ -106,6 +107,26 @@ function renderListingsList() {
             const item = stubListings.find(l => l.id === row.dataset.id);
             openListingForm(item);
         });
+    });
+
+    if (listSortable) listSortable.destroy();
+
+    listSortable = new Sortable(list, {
+        animation: 150,
+        ghostClass: "dragging",
+        onEnd: async () => {
+            const newOrder = [...list.querySelectorAll(".itemRow")].map(row => row.dataset.id);
+            stubListings.sort((a, b) => newOrder.indexOf(a.id) - newOrder.indexOf(b.id));
+
+            await fetch("/api/save-listings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${adminToken}`,
+                },
+                body: JSON.stringify(stubListings),
+            });
+        },
     });
 }
 

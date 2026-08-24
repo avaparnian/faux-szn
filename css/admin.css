@@ -505,3 +505,7 @@ textarea.formInput {
     height: 3rem;
     cursor: pointer;
 }
+
+.itemRow.dragging {
+    opacity: 0.4;
+}
