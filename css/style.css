@@ -586,19 +586,19 @@ header {
 
 .showcaseGrid img {
     width: 100%;
-    aspect-ratio: unset;      /* let photos keep their natural height — the mosaic look */
+    aspect-ratio: unset;
     object-fit: cover;
     display: block;
     margin-bottom: 0;
-    break-inside: avoid;      /* stops a photo being split across two columns */
+    break-inside: avoid;
 }
 
 
     /* LISTINGS */
 .listingsTitle {
-        padding-top: 3rem;
-
-    align-self: center;
+    padding-top: 3rem;
+    text-align: center;
+    margin: 0;
 }
 
 .listingsGrid {
@@ -688,6 +688,8 @@ footer {
 
 
 
+
+
 /* MOBILE */
 @media (max-width: 1000px) {
 
@@ -744,6 +746,9 @@ footer {
         font-size: 1.0rem;
     }
 }
+
+
+
 
 /* DESKTOP */
 @media (min-width: 1000px) {
