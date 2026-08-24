@@ -603,6 +603,7 @@ header {
 
 .listingsGrid {
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(2, 25%);
     justify-content: center;
     gap: 5rem;
