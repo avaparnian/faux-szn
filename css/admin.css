@@ -507,5 +507,5 @@ textarea.formInput {
 }
 
 .itemRow.dragging {
-    opacity: 0.4;
+    opacity: 0;
 }
