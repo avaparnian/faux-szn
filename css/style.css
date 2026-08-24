@@ -730,7 +730,7 @@ footer {
         font-size: 1.4rem;
     }
     .listingsGrid {
-        grid-template-columns: repeat(2, 45%);
+        grid-template-columns: repeat(2, 47vw);
         gap: 0;
         justify-content: space-evenly;
         padding-top: 1.5rem;
