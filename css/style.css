@@ -604,11 +604,6 @@ header {
 
 
     /* LISTINGS */
-.listingsTitle {
-    text-align: center;
-    margin: 0;
-}
-
 .listingsGrid {
     display: grid;
     width: 100%;
