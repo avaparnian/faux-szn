@@ -749,10 +749,6 @@ header {
     }
 
     /* LISTINGS */
-
-    .listingsTitle {
-        font-size: 1.4rem;
-    }
     .listingsGrid {
         grid-template-columns: repeat(2, 44vw);
         gap: 0 3vw;
