@@ -9,6 +9,7 @@ function saveCart() {
 }
 
 let currentItem = null;
+let selectedSize = null;
 
 // CARDS
 function renderCard(item) {
@@ -26,11 +27,68 @@ function renderCard(item) {
   return card;
 }
 
-// PRODUCT VIEW
+// ELEMENT REFERENCES
 const productView = document.getElementById("productView");
+const hamburgerBtn = document.querySelector(".hamburgerBtn");
+const menuDrawer = document.getElementById("menuDrawer");
+const cartBtn = document.querySelector(".cartBtn");
+const cartDrawer = document.getElementById("cartDrawer");
+const pvTrack = document.querySelector(".pvTrack");
+
+// OVERLAY CONTROL — one mechanism, mutual exclusion
+function closeMenu() {
+    menuDrawer.classList.remove("open");
+    hamburgerBtn.classList.remove("open");
+    hamburgerBtn.setAttribute("aria-label", "Open menu");
+}
+
+function closeCart() {
+    cartDrawer.classList.remove("open");
+    cartBtn.classList.remove("open");
+    cartBtn.setAttribute("aria-label", "Open cart");
+}
+
+function closeProductView() {
+    productView.classList.remove("open");
+}
+
+function closeAllOverlays() {
+    closeMenu();
+    closeCart();
+    closeProductView();
+    document.body.classList.remove("noScroll");
+}
+
+// HAMBURGER TOGGLE
+hamburgerBtn.addEventListener("click", () => {
+    const wasOpen = menuDrawer.classList.contains("open");
+    closeAllOverlays();
+
+    if (!wasOpen) {
+        menuDrawer.classList.add("open");
+        hamburgerBtn.classList.add("open");
+        hamburgerBtn.setAttribute("aria-label", "Close menu");
+        document.body.classList.add("noScroll");
+    }
+});
+
+// CART TOGGLE
+cartBtn.addEventListener("click", () => {
+    const wasOpen = cartDrawer.classList.contains("open");
+    closeAllOverlays();
+
+    if (!wasOpen) {
+        cartDrawer.classList.add("open");
+        cartBtn.classList.add("open");
+        cartBtn.setAttribute("aria-label", "Close cart");
+        document.body.classList.add("noScroll");
+    }
+});
 
 // OPEN PRODUCT VIEW
 function openProductView(item) {
+  closeAllOverlays();
+
   currentItem = item;
 
   // TEXT
@@ -62,12 +120,16 @@ function openProductView(item) {
 
   // OPEN PREVIEW
   productView.classList.add("open");
-  document.body.style.overflow = "hidden";
+  document.body.classList.add("noScroll");
 }
 
-// SIZE SELECTION
-let selectedSize = null;
+document.querySelector(".pvClose").addEventListener("click", closeAllOverlays);
 
+productView.addEventListener("click", (e) => {
+  if (e.target === productView) closeAllOverlays();
+});
+
+// SIZE SELECTION
 document.querySelector(".pvSizes").addEventListener("click", (e) => {
   const btn = e.target.closest(".sizeBtn");
   if (!btn || btn.disabled) return;
@@ -78,8 +140,6 @@ document.querySelector(".pvSizes").addEventListener("click", (e) => {
 });
 
 // CAROUSEL CONTROLS
-const pvTrack = document.querySelector(".pvTrack");
-
 document.querySelector(".pvNext").addEventListener("click", () => {
   pvTrack.scrollBy({left: pvTrack.clientWidth, behavior: "smooth" });
 });
@@ -108,63 +168,17 @@ function addToCart() {
   });
   saveCart();
   renderCart();
-  closeProductView();
-  closeMenu();
+
+  closeAllOverlays();
   cartDrawer.classList.add("open");
   cartBtn.classList.add("open");
+  cartBtn.setAttribute("aria-label", "Close cart");
+  document.body.classList.add("noScroll");
 }
 
+document.querySelector(".pvAddBtn").addEventListener("click", addToCart);
 
-// CLOSE PRODUCT VIEW
-function closeProductView() {
-  productView.classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-document.querySelector(".pvClose").addEventListener("click", closeProductView);
-
-productView.addEventListener("click", (e) => {
-  if (e.target === productView) closeProductView();
-});
-
-// HAMBURGER TOGGLE
-const hamburgerBtn = document.querySelector(".hamburgerBtn");
-const menuDrawer = document.getElementById("menuDrawer");
-
-hamburgerBtn.addEventListener("click", () => {
-    menuDrawer.classList.toggle("open");
-    hamburgerBtn.classList.toggle("open");
-    document.body.classList.toggle("noScroll");
-
-const isOpen = menuDrawer.classList.contains("open");
-hamburgerBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-});
-
-// CART TOGGLE
-const cartBtn = document.querySelector(".cartBtn");
-const cartDrawer = document.getElementById("cartDrawer");
-
-function closeCart() {
-    cartDrawer.classList.remove("open");
-    cartBtn.classList.remove("open");
-    cartBtn.setAttribute("aria-label", "Open cart");
-}
-
-function closeMenu() {
-    menuDrawer.classList.remove("open");
-    hamburgerBtn.classList.remove("open");
-    hamburgerBtn.setAttribute("aria-label", "Open menu");
-}
-
-cartBtn.addEventListener("click", () => {
-    closeMenu();
-    cartDrawer.classList.toggle("open");
-    cartBtn.classList.toggle("open");
-    const isOpen = cartDrawer.classList.contains("open");
-    cartBtn.setAttribute("aria-label", isOpen ? "Close cart" : "Open cart");
-});
-
-// CART 
+// CART RENDERING
 function renderCart() {
     const list = document.querySelector(".cartItems");
 
@@ -182,7 +196,6 @@ function renderCart() {
         `)
         .join("");
 
-    // totals
     const subtotal = cart.reduce((sum, entry) => sum + entry.price, 0);
     const shipping = cart.length ? 1200 : 0;
     document.querySelector(".csCart").textContent = formatPrice(subtotal);
@@ -218,7 +231,7 @@ document.querySelector(".checkoutBtn").addEventListener("click", async () => {
     const data = await res.json();
 
     if (data.url) {
-        window.location.href = data.url;   // redirect to Stripe's hosted checkout
+        window.location.href = data.url;
     }
 });
 
@@ -231,7 +244,6 @@ async function loadListings() {
     if (!res.ok) throw new Error("Request failed: " + res.status);
 
     const items = await res.json();
-
     const activeItems = items.filter(item => item.active);
 
     activeItems.forEach(item => {
@@ -248,12 +260,13 @@ const sitePages = document.querySelectorAll(".sitePage");
 const navLinks = document.querySelectorAll("[data-page]");
 
 function switchPage(target) {
+    closeAllOverlays();
+
     sitePages.forEach(p => p.classList.remove("active"));
     document.getElementById(`page-${target}`).classList.add("active");
 
     navLinks.forEach(link => link.classList.toggle("current", link.dataset.page === target));
 
-    closeMenu();
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -276,9 +289,6 @@ async function loadShowcase() {
     }
 }
 
-loadShowcase();
-
-document.querySelector(".pvAddBtn").addEventListener("click", addToCart);
 loadListings();
+loadShowcase();
 renderCart();
-
