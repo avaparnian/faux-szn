@@ -547,14 +547,23 @@ header {
 /* SITE PAGES */
 .sitePage {
     display: none;
+    padding-top: 3rem;
+    box-sizing: border-box;
 }
 
 .sitePage.active {
     display: block;
 }
 
+.sitePage > * + * {
+    margin-top: 3rem;
+}
+
+.pageSpacer {
+    height: 2rem;
+}
+
 .pageTitle {
-    padding-top: 3rem;
     text-align: center;
     margin: 0;
 }
@@ -562,7 +571,7 @@ header {
 .aboutContent,
 .contactContent {
     max-width: 40rem;
-    margin: 2rem auto 4rem;
+    margin: 0 auto 4rem;
     padding: 0 1.5rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
@@ -582,8 +591,6 @@ header {
     max-width: none;
     margin: 0;
     padding: 0;
-    padding-top: 4rem;
-
 }
 
 .showcaseGrid img {
@@ -608,7 +615,6 @@ header {
     width: 100%;
     grid-template-columns: repeat(2, 20rem);
     justify-content: center;
-    gap: 3rem;
     padding-top: 3rem;
 }
 
@@ -689,11 +695,11 @@ header {
     align-items: center;
     gap: 1.5rem;
     padding: 4rem 1.5rem 3rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* border-top: 1px solid rgba(255, 255, 255, 0.15); */
 }
 
 .siteFooter a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.393);
     text-decoration: none;
     font-size: 0.85rem;
     letter-spacing: 0.15em;
@@ -704,7 +710,7 @@ header {
 }
 
 .footerCopyright {
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.236);
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     margin-top: 1.5rem;
@@ -751,7 +757,6 @@ header {
     /* LISTINGS */
 
     .listingsTitle {
-        padding-top: 1rem;
         font-size: 1.4rem;
     }
     .listingsGrid {
@@ -769,6 +774,14 @@ header {
         margin-top: 0;
         padding-top: 0.5rem;
         font-size: 1.0rem;
+    }
+
+        .sitePage {
+        padding-top: 1.5rem;
+    }
+
+    .sitePage > * + * {
+        margin-top: 2rem;
     }
 }
 
