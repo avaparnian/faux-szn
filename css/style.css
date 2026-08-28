@@ -563,6 +563,15 @@ header {
     height: 2rem;
 }
 
+.pageAccent {
+    display: block;
+    max-width: 12rem;
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0.8;
+}
+
 .pageTitle {
     text-align: center;
     margin: 0;
@@ -574,6 +583,7 @@ header {
     margin: 0 auto 4rem;
     padding: 0 1.5rem;
     line-height: 1.8;
+    text-align: center;
     color: rgba(255, 255, 255, 0.85);
 }
 
