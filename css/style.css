@@ -605,7 +605,6 @@ header {
 
     /* LISTINGS */
 .listingsTitle {
-    padding-top: 3rem;
     text-align: center;
     margin: 0;
 }
@@ -760,10 +759,9 @@ header {
         font-size: 1.4rem;
     }
     .listingsGrid {
-        grid-template-columns: repeat(2, 47vw);
-        gap: 0;
-        justify-content: space-evenly;
-        padding-top: 1.5rem;
+        grid-template-columns: repeat(2, 44vw);
+        gap: 0 3vw;
+        justify-content: center;
     }
 
     .productName {
