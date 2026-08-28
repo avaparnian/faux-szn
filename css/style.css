@@ -1,21 +1,28 @@
+/* ============================================= */
+/* ROOT VARIABLES */
+/* ============================================= */
+
 :root {
     --bg: rgb(0,0,0);
     --text: rgb(240, 240, 240);
     --menu: rgba(15, 15, 15, 0.98);
-
     --product-ratio: 4/5;
 }
 
 @font-face {
     font-family: "Spectral";
-    src: url("/assets/Spectral.ttf") format("truetype")
+    src: url("/assets/Spectral.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     background-color: var(--bg);
-    color: var(--text) ;
+    color: var(--text);
     font-family: Spectral;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     margin: 0;
 }
@@ -24,8 +31,10 @@ body.noScroll {
     overflow: hidden;
 }
 
-
+/* ============================================= */
 /* NAV BAR */
+/* ============================================= */
+
 header {
     position: fixed;
     top: 0;
@@ -34,7 +43,6 @@ header {
     z-index: 10;
     display: grid;
     height: 8rem;
-    box-sizing: border-box;
     padding: 0 2rem 2rem;
     align-items: center;
     grid-template-columns: 1fr auto 1fr;
@@ -69,9 +77,6 @@ header {
     text-decoration: none;
     font-size: 1.3rem;
 }
-.navItem:hover {
-    /* text-decoration: underline; */
-}
 
 .iconBtn {
     width: 24px;
@@ -93,7 +98,6 @@ header {
     cursor: pointer;
     display: flex;
     justify-self: end;
-
     position: relative;
 }
 
@@ -142,30 +146,33 @@ header {
 .hamburgerBtn.open .hbLine:nth-child(1) {
     transform: translateY(6.5px) rotate(45deg);
 }
+
 .hamburgerBtn.open .hbLine:nth-child(2) {
     opacity: 0;
     transform: scaleX(0);
 }
+
 .hamburgerBtn.open .hbLine:nth-child(3) {
     transform: translateY(-6.5px) rotate(-45deg);
 }
 
+/* ============================================= */
+/* CART DRAWER */
+/* ============================================= */
 
-
-/* CART */
 .cartDrawer {
     position: fixed;
     inset: 0;
     z-index: 5;
     background-color: var(--menu);
     padding: 6rem 1.5rem 2rem;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s;
 }
+
 .cartDrawer.open {
     opacity: 1;
     visibility: visible;
@@ -187,7 +194,7 @@ header {
 }
 
 .cartSummary {
-    padding: 1rem 0rem 0rem;
+    padding: 1rem 0 0;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -203,8 +210,6 @@ header {
     transform: translateX(1rem);
 }
 
-
-
 .ciImg {
     width: 8rem;
     aspect-ratio: var(--product-ratio);
@@ -219,7 +224,7 @@ header {
     min-width: 0;
 }
 
-.ciInfo p{
+.ciInfo p {
     margin: 0;
 }
 
@@ -241,7 +246,7 @@ header {
 
 .csTotal {
     font-size: 1.6rem;
-    margin-top: 0.rem;
+    margin-top: 0.5rem;
 }
 
 .checkoutBtn {
@@ -256,19 +261,19 @@ header {
     cursor: pointer;
 }
 
-
+/* ============================================= */
 /* MENU DRAWER */
+/* ============================================= */
+
 .menuDrawer {
     position: fixed;
     inset: 0;
     z-index: 5;
     background: var(--menu);
     padding-top: 8rem;
-
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s;
-
 }
 
 .menuDrawer.open {
@@ -296,15 +301,16 @@ header {
     background: rgba(255, 255, 255, 0.15);
 }
 
-
+/* ============================================= */
 /* PRODUCT VIEW */
+/* ============================================= */
+
 .productView {
     position: fixed;
     inset: 0;
     z-index: 5;
     background-color: var(--menu);
     padding-top: 4rem;
-
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s;
@@ -319,7 +325,6 @@ header {
     height: 100dvh;
     overflow-y: auto;
     padding: 3rem 1.25rem 20rem;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -360,7 +365,10 @@ header {
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
 }
-.pvTrack::-webkit-scrollbar {display: none;}
+
+.pvTrack::-webkit-scrollbar {
+    display: none;
+}
 
 .pvTrack img {
     width: 100%;
@@ -383,14 +391,18 @@ header {
     font-size: 5rem;
 }
 
-.pvPrev {left: 0.2rem;}
-.pvNext {right: 0.2rem;}
+.pvPrev {
+    left: 0.2rem;
+}
+
+.pvNext {
+    right: 0.2rem;
+}
 
 .pvBottom {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* background-color: red; */
 }
 
 .pvDots {
@@ -444,7 +456,6 @@ header {
     height: 100%;
     min-width: 0;
     min-height: 0;
-
     position: relative;
     background: none;
     border: 0.15rem solid rgba(255, 255, 255, 0.2);
@@ -456,11 +467,10 @@ header {
     overflow: visible;
 }
 
-
 .sizeBtn.unavailable {
     border: 0.2rem solid rgba(34, 34, 34, 0.47);
     cursor: not-allowed;
-    color: rgba(73, 73, 73, 0.47) ;
+    color: rgba(73, 73, 73, 0.47);
 }
 
 .sizeBtn.unavailable::before,
@@ -504,11 +514,12 @@ header {
 
 .pvDescription {
     padding-top: 2rem;
-    
 }
 
-
+/* ============================================= */
 /* HERO */
+/* ============================================= */
+
 .hero {
     position: relative;
 }
@@ -517,13 +528,8 @@ header {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        var(--bg) 0%,
-        transparent 20%
-    );
-    pointer-events: none; 
-    
+    background: linear-gradient(to top, var(--bg) 0%, transparent 20%);
+    pointer-events: none;
 }
 
 .heroVideo {
@@ -531,11 +537,14 @@ header {
     width: 100%;
     height: 70vh;
     max-height: 65rem;
-    object-fit: cover;  
+    object-fit: cover;
     position: relative;
     overflow: hidden;
-
 }
+
+/* ============================================= */
+/* SITE PAGES (shared layout for About/Showcase/Contact/Products) */
+/* ============================================= */
 
 .pageWrapper {
     display: flex;
@@ -544,11 +553,9 @@ header {
     width: 100%;
 }
 
-/* SITE PAGES */
 .sitePage {
     display: none;
     padding-top: 3rem;
-    box-sizing: border-box;
 }
 
 .sitePage.active {
@@ -595,6 +602,10 @@ header {
     color: var(--text);
 }
 
+/* ============================================= */
+/* SHOWCASE */
+/* ============================================= */
+
 .showcaseGrid {
     columns: 2;
     column-gap: 0;
@@ -612,25 +623,26 @@ header {
     break-inside: avoid;
 }
 
+/* ============================================= */
+/* LISTINGS */
+/* ============================================= */
 
-    /* LISTINGS */
 .listingsGrid {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(2, 20rem);
     justify-content: center;
-    /* padding-top: 3rem; */
+    gap: 3rem;
 }
 
 .productCard {
     display: flex;
     flex-direction: column;
-    border-left: 1rem;
     height: fit-content;
 }
 
 .productImg {
-    width: 100%;                 /* fill the card's width */
+    width: 100%;
     aspect-ratio: var(--product-ratio);
     object-fit: cover;
     flex-shrink: 0;
@@ -655,7 +667,9 @@ header {
     margin: 0;
 }
 
+/* ============================================= */
 /* CONFIRMATION PAGE */
+/* ============================================= */
 
 .confirmScreen {
     height: 100vh;
@@ -691,15 +705,16 @@ header {
     margin-top: 1rem;
 }
 
-
+/* ============================================= */
 /* FOOTER */
+/* ============================================= */
+
 .siteFooter {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     padding: 4rem 1.5rem 3rem;
-    /* border-top: 1px solid rgba(255, 255, 255, 0.15); */
 }
 
 .siteFooter a {
@@ -720,34 +735,29 @@ header {
     margin-top: 1.5rem;
 }
 
-
-
-
-
-
+/* ============================================= */
 /* MOBILE */
-@media (max-width: 1000px) {
+/* ============================================= */
 
-    /* NAV BAR */
+@media (max-width: 1000px) {
     header {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
 
-    .hamburgerBtn { 
-        display: flex; 
+    .hamburgerBtn {
+        display: flex;
     }
 
     #desktopNav {
-         display: none; 
+        display: none;
     }
 
-    #navLogo { 
-        justify-self: center; 
-        height: 4rem
-    } 
+    #navLogo {
+        justify-self: center;
+        height: 4rem;
+    }
 
-    /* HERO */
     .heroVideo {
         padding-top: 5rem;
         width: 100%;
@@ -758,7 +768,6 @@ header {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* LISTINGS */
     .listingsGrid {
         grid-template-columns: repeat(2, 44vw);
         gap: 0 3vw;
@@ -766,16 +775,16 @@ header {
     }
 
     .productName {
-        font-size: 1.0rem;
+        font-size: 1rem;
     }
 
     .productPrice {
         margin-top: 0;
         padding-top: 0.5rem;
-        font-size: 1.0rem;
+        font-size: 1rem;
     }
 
-        .sitePage {
+    .sitePage {
         padding-top: 1.5rem;
     }
 
@@ -784,24 +793,22 @@ header {
     }
 }
 
-
-
-
+/* ============================================= */
 /* DESKTOP */
+/* ============================================= */
+
 @media (min-width: 1000px) {
     .pvContent {
         height: 100dvh;
         overflow: hidden;
-        padding: 6rem 0 0; 
+        padding: 6rem 0 0;
         display: grid;
-        /* grid-template-columns: 3fr 2fr; */
         grid-template-columns: 1fr 1fr;
-
         grid-template-rows: auto 1fr;
-        grid-template-areas: 
+        grid-template-areas:
             "gallery topbar"
             "gallery bottom";
-            align-items: start;
+        align-items: start;
     }
 
     .pvGallery {
@@ -817,7 +824,7 @@ header {
     }
 
     .pvGallery .pvDots {
-        grid-column: 1/-1;
+        grid-column: 1 / -1;
         justify-content: center;
     }
 
@@ -852,10 +859,9 @@ header {
         overflow-y: auto;
         min-height: 0;
         padding: 0 3rem 4rem;
-        box-sizing: border-box;
     }
 
-    .pvTitle { 
+    .pvTitle {
         font-size: 2rem;
         padding-bottom: 2rem;
     }
@@ -882,7 +888,6 @@ header {
         height: 4rem;
     }
 
-    /* CART */
     .cartDrawer {
         left: auto;
         width: min(26rem, 100%);
