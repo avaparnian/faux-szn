@@ -760,8 +760,10 @@ header {
 
     .heroVideo {
         padding-top: 5rem;
+        height: auto;
         width: 100%;
-        height: 15rem;
+        aspect-ratio: [width] / [height];
+        object-fit: contain;
     }
 
     .showcaseGrid {
