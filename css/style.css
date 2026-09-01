@@ -521,7 +521,7 @@ header {
     margin: 0;
     padding: 0;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -535,7 +535,7 @@ header {
 }
 
 .pvFeatures li::before {
-    content: "—";
+    content: "♱";
     position: absolute;
     left: 0;
     color: rgba(255, 255, 255, 0.4);
