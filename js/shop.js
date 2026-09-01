@@ -96,6 +96,12 @@ function openProductView(item) {
   document.querySelector(".pvPrice").textContent = formatPrice(item.price);
   document.querySelector(".pvDescription").textContent = item.description;
 
+  // FEATURES
+  const features = document.querySelector(".pvFeatures");
+  features.innerHTML = (item.features || [])
+    .map(f => `<li>${f}</li>`)
+    .join("");
+
   // CAROUSEL
   const track = document.querySelector(".pvTrack");
   track.innerHTML = item.images

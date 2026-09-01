@@ -191,6 +191,7 @@ function openListingForm(item) {
     document.getElementById("listingName").value = item ? item.name : "";
     document.getElementById("listingPrice").value = item ? (item.price / 100).toFixed(2) : "";
     document.getElementById("listingDescription").value = item ? (item.description || "") : "";
+    document.getElementById("listingFeatures").value = item && item.features ? item.features.join("\n") : "";
 
     document.querySelectorAll(".sizeToggle").forEach(btn => {
         const size = btn.dataset.size;
@@ -224,11 +225,17 @@ document.getElementById("listingForm").addEventListener("submit", async (e) => {
         sizes[btn.dataset.size] = btn.classList.contains("active");
     });
 
+    const features = document.getElementById("listingFeatures").value
+    .split("\n")
+    .map(f => f.trim())
+    .filter(f => f.length > 0);
+
     const data = {
         id: editingListing ? editingListing.id : "new-" + Date.now(),
         name: document.getElementById("listingName").value,
         price: Math.round(parseFloat(document.getElementById("listingPrice").value) * 100),
         description: document.getElementById("listingDescription").value,
+        features,
         images: formPhotos,
         sizes,
         active: true,

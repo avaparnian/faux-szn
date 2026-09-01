@@ -516,6 +516,37 @@ header {
     padding-top: 2rem;
 }
 
+.pvFeatures {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pvFeatures li {
+    padding-left: 1.25rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+}
+
+.pvFeatures li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.pvShipping {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.5rem;
+}
+
 /* ============================================= */
 /* HERO */
 /* ============================================= */
@@ -543,7 +574,7 @@ header {
 }
 
 /* ============================================= */
-/* SITE PAGES (shared layout for About/Showcase/Contact/Products) */
+/* SITE PAGES */
 /* ============================================= */
 
 .pageWrapper {
