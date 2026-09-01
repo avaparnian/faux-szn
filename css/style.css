@@ -651,12 +651,34 @@ header {
 /* ============================================= */
 
 .showcaseGrid {
+    position: relative;
     columns: 2;
     column-gap: 0;
     max-width: none;
     margin: 0;
     padding: 0;
     padding-bottom: 5rem;
+}
+
+.showcaseGrid::before,
+.showcaseGrid::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.showcaseGrid::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+}
+
+.showcaseGrid::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
 }
 
 .showcaseGrid img {
