@@ -554,7 +554,9 @@ header {
 /* ============================================= */
 
 .hero {
-    position: relative;
+    position: relative;    
+    margin-bottom: 1rem;
+
 }
 
 .hero::after {
