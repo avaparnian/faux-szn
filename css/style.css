@@ -843,6 +843,11 @@ header {
 /* ============================================= */
 
 @media (min-width: 1000px) {
+
+    .sitePage > * + * {
+        margin-top: 3rem;
+    }
+
     .pvContent {
         height: 100dvh;
         overflow: hidden;
