@@ -619,10 +619,11 @@ header {
 
 .aboutContent,
 .contactContent {
-    max-width: 40rem;
+    max-width: 55rem;
     margin: 0 auto 4rem;
     padding: 0 1.5rem;
     line-height: 1.8;
+    font-size: 1.1rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.85);
 }
