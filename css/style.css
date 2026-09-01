@@ -894,6 +894,7 @@ header {
         grid-area: bottom;
         overflow-y: auto;
         min-height: 0;
+        align-self: stretch;
         padding: 0 3rem 4rem;
     }
 
