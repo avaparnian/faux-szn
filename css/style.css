@@ -612,6 +612,15 @@ header {
     opacity: 0.8;
 }
 
+.pageBreak {
+    display: block;
+    max-width: 6rem;
+    width: 30%;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0.6;
+}
+
 .pageTitle {
     text-align: center;
     margin: 0;
