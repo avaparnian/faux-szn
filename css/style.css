@@ -656,6 +656,7 @@ header {
     max-width: none;
     margin: 0;
     padding: 0;
+    padding-bottom: 3rem;
 }
 
 .showcaseGrid img {
