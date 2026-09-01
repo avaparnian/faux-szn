@@ -619,11 +619,10 @@ header {
 
 .aboutContent,
 .contactContent {
-    max-width: 55rem;
+    max-width: 40rem;
     margin: 0 auto 4rem;
     padding: 0 1.5rem;
     line-height: 1.8;
-    font-size: 1.1rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.85);
 }
@@ -934,5 +933,11 @@ header {
 
     .showcaseGrid {
         columns: 3;
+    }
+
+    .aboutContent,
+    .contactContent {
+        max-width: 55rem;
+        font-size: 1.1rem;
     }
 }
